@@ -24,19 +24,20 @@
   <body></body>
     
   <script>
-      
 
-          
+  // generating a user id and file name  
+  var secret_code  = jsPsych.randomization.randomID(8);
+  const file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
+
+
     var jsPsych = initJsPsych({
         show_progress_bar:false,
         on_data_update: function(){
-            var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
             jsPsych.data.addProperties({worker_id: urlvar.workerId});
             //saveData(file, jsPsych.data.get().csv());
             save_data();
         },
         on_finish: function(){
-            var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (to same file name as above)
             jsPsych.data.addProperties({worker_id: urlvar.workerId});
             //saveData(file, jsPsych.data.get().csv());
             save_data();
@@ -48,7 +49,6 @@
 
           /* create timeline */
     var timeline = [];
-    var secret_code  = jsPsych.randomization.randomID(8);
       
     // pulling info re: mechanical turk hit
       var urlvar = jsPsych.data.urlVariables();  
