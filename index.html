@@ -45,7 +45,7 @@
     
   // generating a user id and file name  
   var secret_code  = jsPsych.randomization.randomID(8);
-  var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
+  var file_name = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
 
 
           /* create timeline */
@@ -1994,7 +1994,7 @@ var demographics = {
         type: jsPsychPipe,
         action: "save",
         experiment_id: "2IwoRUf8HArf",
-        filename: file,
+        filename: file_name,
         data_string: ()=>jsPsych.data.get().csv()
       };
       
