@@ -25,10 +25,6 @@
     
   <script>
 
-  // generating a user id and file name  
-  var secret_code  = jsPsych.randomization.randomID(8);
-  const file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
-
     var jsPsych = initJsPsych({
         show_progress_bar:false,
         on_data_update: function(){
@@ -44,7 +40,13 @@
         },
         max_load_time: 120000
     });
-      
+
+
+    
+  // generating a user id and file name  
+  var secret_code  = jsPsych.randomization.randomID(8);
+  var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
+
 
           /* create timeline */
     var timeline = [];
