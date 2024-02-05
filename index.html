@@ -24,28 +24,32 @@
   <body></body>
     
   <script>
-      
 
-          
     var jsPsych = initJsPsych({
         show_progress_bar:false,
         on_data_update: function(){
-            var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
             jsPsych.data.addProperties({worker_id: urlvar.workerId});
-            saveData(file, jsPsych.data.get().csv());
+            //saveData(file, jsPsych.data.get().csv());
+            save_data();
         },
         on_finish: function(){
-            var file = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (to same file name as above)
             jsPsych.data.addProperties({worker_id: urlvar.workerId});
-            saveData(file, jsPsych.data.get().csv());
+            //saveData(file, jsPsych.data.get().csv());
+            save_data();
+
         },
         max_load_time: 120000
     });
-      
+
+
+    
+  // generating a user id and file name  
+  var secret_code  = jsPsych.randomization.randomID(8);
+  var file_name = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
+
 
           /* create timeline */
     var timeline = [];
-    var secret_code  = jsPsych.randomization.randomID(8);
       
     // pulling info re: mechanical turk hit
       var urlvar = jsPsych.data.urlVariables();  
@@ -1990,7 +1994,7 @@ var demographics = {
         type: jsPsychPipe,
         action: "save",
         experiment_id: "2IwoRUf8HArf",
-        filename: filename,
+        filename: file_name,
         data_string: ()=>jsPsych.data.get().csv()
       };
       
