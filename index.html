@@ -47,6 +47,15 @@
   var secret_code  = jsPsych.randomization.randomID(8);
   var file_name = "triplets_wpm-words_uk_young_" + secret_code; // CHANGE THIS (file name)
 
+        // this is to save to OSF using DataPipe
+
+  var save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "2IwoRUf8HArf",
+    filename: file_name,
+    data_string: ()=>jsPsych.data.get().csv()
+  };
 
           /* create timeline */
     var timeline = [];
@@ -1988,15 +1997,7 @@ var demographics = {
 //      xhr.send(JSON.stringify({filename: name, filedata: data}));
 //    }
        
-    // this is to save to OSF using DataPipe
 
-      const save_data = {
-        type: jsPsychPipe,
-        action: "save",
-        experiment_id: "2IwoRUf8HArf",
-        filename: file_name,
-        data_string: ()=>jsPsych.data.get().csv()
-      };
       
       
     jsPsych.run(timeline);
