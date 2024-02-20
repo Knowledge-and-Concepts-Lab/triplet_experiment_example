@@ -1831,7 +1831,7 @@ var validation_procedure_social = {
     prompt: "Select the item closest to the item on top",
     sample :{
         type: 'without-replacement',
-        size: 20 // CHANGE THIS if you want a different number of validation trials per block
+        size: 10 // CHANGE THIS if you want a different number of validation trials per block
     }
 };
       
@@ -1842,7 +1842,7 @@ var trial_procedure_social = {
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 4 // CHANGE THIS if you want a different number of regular trials per block
+        size: 40 // CHANGE THIS if you want a different number of regular trials per block
     }
 };
           
@@ -1861,7 +1861,7 @@ var check_social = {
 var social_procedure = {
     timeline: [trial_procedure_social, check_social, validation_procedure_social],
     randomize_order: true,
-    repetitions: 1 // CHANGE THIS if you want a different number of all trials
+    repetitions: 5 // CHANGE THIS if you want a different number of all trials
 };
       
       
@@ -1884,7 +1884,7 @@ var validation_procedure_nonsocial = {
     randomize_order: true,
     sample: {
         type: 'without-replacement',
-        size: 20
+        size: 10
     }
 };
       
@@ -1895,7 +1895,7 @@ var trial_procedure_nonsocial = {
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 4
+        size: 40
     }
 };
       
@@ -1913,7 +1913,7 @@ var check_nonsocial = {
 var nonsocial_procedure = {
     timeline: [trial_procedure_nonsocial, check_nonsocial, validation_procedure_nonsocial],
     randomize_order: true,
-    repetitions: 1
+    repetitions: 5
 };
       
 // *** END OF OPTIONAL CODE *** //
