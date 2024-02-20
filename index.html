@@ -1824,17 +1824,13 @@
         return result;
     }
       
-    //actually grabbing them
-    var selected_validation_social = getRandom(validation_social, 100); // CHANGE THIS IF YOU WANT A DIFFERENT NUMBER OF VALIDATION TRIALS SAMPLED... in this case we will only use 50 of these 100
-    var selected_validation_nonsocial = getRandom(validation_nonsocial, 100);
-      
     
 var validation_procedure_social = {
     timeline: [fixation, validation_trial, if_node_speed],
-    timeline_variables: selected_validation_social,
+    timeline_variables: validation_social,
     prompt: "Select the item closest to the item on top",
     sample :{
-        type: 'without-replacement',
+        type: 'with-replacement',
         size: 10 // CHANGE THIS if you want a different number of validation trials per block
     }
 };
@@ -1883,11 +1879,11 @@ var social_procedure = {
 // *** OPTIONAL, ONLY NEEDED IF USING A 2 FILE LISTS *** //
 var validation_procedure_nonsocial = {
     timeline: [fixation, validation_trial, if_node_speed],
-    timeline_variables: selected_validation_nonsocial,
+    timeline_variables: validation_nonsocial,
     prompt: "Select the item closest to the item on top",
     randomize_order: true,
     sample: {
-        type: 'without-replacement',
+        type: 'with-replacement',
         size: 10
     }
 };
