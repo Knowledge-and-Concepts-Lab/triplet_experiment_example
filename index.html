@@ -1830,7 +1830,7 @@ var validation_procedure_social = {
     timeline_variables: validation_social,
     prompt: "Select the item closest to the item on top",
     sample :{
-        type: 'with-replacement',
+        type: 'without-replacement',
         size: 10 // CHANGE THIS if you want a different number of validation trials per block
     }
 };
@@ -1883,7 +1883,7 @@ var validation_procedure_nonsocial = {
     prompt: "Select the item closest to the item on top",
     randomize_order: true,
     sample: {
-        type: 'with-replacement',
+        type: 'without-replacement',
         size: 10
     }
 };
