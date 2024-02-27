@@ -1621,13 +1621,13 @@
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "Welcome to the experiment. Press any key to begin."
     };
-    timeline.push(welcome);
+    //timeline.push(welcome);
       
       
-    timeline.push({
-      type: jsPsychFullscreen,
-      fullscreen_mode: true
-    });    
+//    timeline.push({
+//      type: jsPsychFullscreen,
+//      fullscreen_mode: true
+//    });    
          
     /* define consent trail */
     var consent = {
@@ -1635,7 +1635,7 @@
         stimulus: "kc_lab_consent_prolific.png", // CHANGE THIS (to Mturk/Prolific or SONA depending on your sample)
         choices: ["Consent & Continue"]
     };
-    timeline.push(consent);
+    //timeline.push(consent);
       
     var lasttrialdata_rt = 0;
           
@@ -1648,9 +1648,14 @@
         "<p>There will be 2 rounds of this task with around 250 trials per round. You will have the opportunity to take a break midway. </p>"+
           "<p>Click 'Continue' to begin the test.</p>",
         choices: ["Continue"],
-      post_trial_gap: 2000
+        post_trial_gap: 2000,
+        on_finish: function(){
+            shuffle(validation_social);
+            shuffle(validation_nonsocial);
+
+        }
     };
-    timeline.push(instructions);  
+   timeline.push(instructions);  
       
       
       var fixation = {
@@ -1664,6 +1669,7 @@
       var arr_pair = [];
 
 // define the trials!
+      
       var trial_social = {
           type: jsPsychImageButtonResponse,
             stimulus: jsPsych.timelineVariable('item'),    // IF YOU CHANGED THE OBJECT NAMES IN YOUR ARRAY ABOVE, CHANGE THEM HERE TO MATCH     
@@ -1691,8 +1697,6 @@
                 data.validation = false;
             }
       };
-      
-
       
     var trial_nonsocial = {
           type: jsPsychImageButtonResponse,
@@ -1724,11 +1728,14 @@
       
       
       // define the validation trials!
-      var validation_trial = {
+      var validation_trial_social = {
           type: jsPsychImageButtonResponse,
-            stimulus: jsPsych.timelineVariable('head'),         
+            stimulus: function(){
+                row = validation_social.pop();
+                head = row.head;
+                return head;},         
             choices: function(){
-                arr_pair = [jsPsych.timelineVariable('choice_1'), jsPsych.timelineVariable('choice_2')];
+                arr_pair = [row.choice_1, row.choice_2];
                 return arr_pair;
             },
             button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
@@ -1746,6 +1753,31 @@
           }
       };
       
+      
+      var validation_trial_nonsocial = {
+          type: jsPsychImageButtonResponse,
+            stimulus: function(){
+                row = validation_nonsocial.pop();
+                head = row.head;
+                return head;},         
+            choices: function(){
+                arr_pair = [row.choice_1, row.choice_2];
+                return arr_pair;
+            },
+            button_html: '<button class="jspsych-btn"><img src= %choice%></button>',
+          on_finish: function(data){
+              data.choices = arr_pair;
+              n = 1;
+                var data_last = jsPsych.data.get().last(n);
+                lasttrialdata_rt = data_last.select('rt').mean();
+                if (lasttrialdata_rt < 1000){
+                      data.speedy = true;
+                    } else {
+                      data.speedy = false; 
+                }
+              data.validation = true;
+          }
+      };
       
       // define the attention checks!
       var check_trial = {
@@ -1826,9 +1858,9 @@
       
     
 var validation_procedure_social = {
-    timeline: [fixation, validation_trial, if_node_speed],
+    timeline: [fixation, validation_trial_social, if_node_speed],
     timeline_variables: validation_social,
-    prompt: "Select the item closest to the item on top",
+    prompt: "Select the item closest to the item on top - VALIDATION",
     sample :{
         type: 'without-replacement',
         size: 10 // CHANGE THIS if you want a different number of validation trials per block
@@ -1838,11 +1870,11 @@ var validation_procedure_social = {
 var trial_procedure_social = {
     timeline: [fixation, trial_social, if_node_speed],
     timeline_variables: stimuli_social,
-    prompt: "Select the item closest to the item on top",
+    prompt: "Select the item closest to the item on top - RANDOM",
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 40 // CHANGE THIS if you want a different number of regular trials per block
+        size: 4 // CHANGE THIS if you want a different number of regular trials per block
     }
 };
           
@@ -1858,10 +1890,12 @@ var check_social = {
 };
       
         
+      
+      
 var social_procedure = {
     timeline: [trial_procedure_social, check_social, validation_procedure_social],
     randomize_order: true,
-    repetitions: 5 // CHANGE THIS if you want a different number of all trials
+    repetitions: 5
 };
       
       
@@ -1878,24 +1912,24 @@ var social_procedure = {
 
 // *** OPTIONAL, ONLY NEEDED IF USING A 2 FILE LISTS *** //
 var validation_procedure_nonsocial = {
-    timeline: [fixation, validation_trial, if_node_speed],
+    timeline: [fixation, validation_trial_nonsocial, if_node_speed],
     timeline_variables: validation_nonsocial,
-    prompt: "Select the item closest to the item on top",
+    prompt: "Select the item closest to the item on top - VALIDATION",
     randomize_order: true,
     sample: {
         type: 'without-replacement',
-        size: 10
+        size: 1
     }
 };
       
 var trial_procedure_nonsocial = {
     timeline: [fixation, trial_nonsocial, if_node_speed],
     timeline_variables: stimuli_nonsocial,
-    prompt: "Select the item closest to the item on top",    
+    prompt: "Select the item closest to the item on top - RANDOM",    
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 40
+        size: 4
     }
 };
       
