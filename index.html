@@ -1621,13 +1621,13 @@
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "Welcome to the experiment. Press any key to begin."
     };
-    //timeline.push(welcome);
+    timeline.push(welcome);
       
       
-//    timeline.push({
-//      type: jsPsychFullscreen,
-//      fullscreen_mode: true
-//    });    
+    timeline.push({
+      type: jsPsychFullscreen,
+      fullscreen_mode: true
+    });    
          
     /* define consent trail */
     var consent = {
@@ -1635,7 +1635,7 @@
         stimulus: "kc_lab_consent_prolific.png", // CHANGE THIS (to Mturk/Prolific or SONA depending on your sample)
         choices: ["Consent & Continue"]
     };
-    //timeline.push(consent);
+    timeline.push(consent);
       
     var lasttrialdata_rt = 0;
           
