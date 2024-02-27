@@ -1874,7 +1874,7 @@ var trial_procedure_social = {
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 4 // CHANGE THIS if you want a different number of regular trials per block
+        size: 40 // CHANGE THIS if you want a different number of regular trials per block
     }
 };
           
@@ -1895,7 +1895,7 @@ var check_social = {
 var social_procedure = {
     timeline: [trial_procedure_social, check_social, validation_procedure_social],
     randomize_order: true,
-    repetitions: 1
+    repetitions: 5
 };
       
       
@@ -1929,7 +1929,7 @@ var trial_procedure_nonsocial = {
     randomize_order: true,
     sample: {
         type: 'with-replacement',
-        size: 4
+        size: 40
     }
 };
       
@@ -1947,7 +1947,7 @@ var check_nonsocial = {
 var nonsocial_procedure = {
     timeline: [trial_procedure_nonsocial, check_nonsocial, validation_procedure_nonsocial],
     randomize_order: true,
-    repetitions: 1
+    repetitions: 5
 };
       
 // *** END OF OPTIONAL CODE *** //
